@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--name space는 암케나 해도 된데-->
+<mapper namespace="Calendar">
+    <insert id="insertCalendar">
+        insert into CALENDAR (title, Dday, starttime, endtime, location, content, category)
+        values
+        (#{title}, #{Dday}, #{starttime}, #{endtime}, #{location}, #{content}, #{category})
+    </insert>
+    <update id="updateCalendar">
+        update CALENDAR
+        set starttime=#{starttime}, endtime=#{endtime}, Dday=#{Dday}, title=#{title}, content=#{content}, location=#{location}, category=#{category}
+        where seq=#{seq}
+    </update>
+    <delete id="deleteCalendar">
+        delete from CALENDAR where seq=#{seq}
+    </delete>
+<!-- 이거 resultType="board"로 되어 있었음....이거 때문에 2시간이라니....-->
+    <select id="getCalendar" resultType="calendar">
+        select * from CALENDAR where seq=#{seq}
+    </select>
+    <select id="getCalendarList" resultType="calendar">
+        select * from CALENDAR order by seq
+    </select>
+</mapper>
